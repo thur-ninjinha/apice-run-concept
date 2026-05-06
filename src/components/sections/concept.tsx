@@ -2,11 +2,15 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
-export function Concept() {
-  const ref = useRef<HTMLDivElement>(null);
+function ConceptParallaxBg({
+  targetRef,
+}: {
+  targetRef: React.RefObject<HTMLElement | null>;
+}) {
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: targetRef,
     offset: ["start end", "end start"],
   });
 
@@ -14,10 +18,7 @@ export function Concept() {
   const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <section
-      ref={ref}
-      className="relative py-32 md:py-48 border-t border-white/5 bg-apice-asphalt overflow-hidden"
-    >
+    <>
       <motion.div
         aria-hidden="true"
         style={{ y: y1 }}
@@ -37,6 +38,41 @@ export function Concept() {
           02→04
         </span>
       </motion.div>
+    </>
+  );
+}
+
+export function Concept() {
+  const ref = useRef<HTMLElement>(null);
+  const lite = useLiteMotion();
+
+  return (
+    <section
+      ref={ref}
+      className="relative py-32 md:py-48 border-t border-white/5 bg-apice-asphalt overflow-hidden"
+    >
+      {lite ? (
+        <>
+          <div
+            aria-hidden="true"
+            className="absolute -top-20 right-0 lg:right-[5%] pointer-events-none select-none"
+          >
+            <span className="block font-display italic text-[28vw] lg:text-[16vw] leading-[0.8] tracking-tighter text-apice-orange/[0.06]">
+              dupla
+            </span>
+          </div>
+          <div
+            aria-hidden="true"
+            className="absolute bottom-0 -left-[5%] pointer-events-none select-none"
+          >
+            <span className="block font-display text-[24vw] lg:text-[14vw] leading-[0.8] tracking-tighter text-apice-orange/[0.04]">
+              02→04
+            </span>
+          </div>
+        </>
+      ) : (
+        <ConceptParallaxBg targetRef={ref} />
+      )}
 
       <div className="container mx-auto px-6 lg:px-12 relative">
         <div className="max-w-5xl">

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 type Props = {
   count?: number;
@@ -8,6 +9,9 @@ type Props = {
 };
 
 export function SpeedLines({ count = 6, className }: Props) {
+  const lite = useLiteMotion();
+  if (lite) return null;
+
   return (
     <div className={"pointer-events-none absolute inset-0 overflow-hidden " + (className ?? "")}>
       {Array.from({ length: count }).map((_, i) => {

@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 type Props = {
   items: string[];
@@ -18,6 +19,7 @@ export function Marquee({
   className,
   separator,
 }: Props) {
+  const lite = useLiteMotion();
   const sep = separator ?? (
     <span className="mx-6 inline-block size-2 rounded-full bg-current opacity-40 align-middle" />
   );
@@ -42,12 +44,12 @@ export function Marquee({
     >
       <motion.div
         className="flex"
-        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{
-          duration: speed,
-          ease: "linear",
-          repeat: Infinity,
-        }}
+        animate={lite ? undefined : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={
+          lite
+            ? undefined
+            : { duration: speed, ease: "linear", repeat: Infinity }
+        }
       >
         {content}
         {content}

@@ -6,6 +6,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { Countdown } from "@/components/ui/countdown";
 import { Marquee } from "@/components/ui/marquee";
 import { SpeedLines } from "@/components/ui/speed-lines";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const APICE_LETTERS = "ÁPICE".split("");
@@ -52,6 +53,8 @@ const MARQUEE_ITEMS = [
 ];
 
 export function Hero() {
+  const lite = useLiteMotion();
+
   return (
     <section className="relative isolate min-h-[100svh] flex flex-col overflow-hidden">
       <div className="absolute inset-0 -z-20">
@@ -77,8 +80,12 @@ export function Hero() {
         className="pointer-events-none absolute -z-10 -bottom-[8vw] -right-[6vw] select-none"
       >
         <motion.span
-          animate={{ scale: [1, 1.03, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          animate={lite ? undefined : { scale: [1, 1.03, 1] }}
+          transition={
+            lite
+              ? undefined
+              : { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }
           className="block font-display italic text-[42vw] leading-[0.7] tracking-tighter text-apice-orange/[0.08]"
         >
           5K

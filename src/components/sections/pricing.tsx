@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 type Status = "closed" | "active" | "upcoming";
 
@@ -52,6 +53,8 @@ const lots: Lot[] = [
 ];
 
 export function Pricing() {
+  const lite = useLiteMotion();
+
   return (
     <section
       id="inscricao"
@@ -90,7 +93,7 @@ export function Pricing() {
                   "bg-apice-asphalt/60 border-white/10 text-apice-white hover:border-apice-orange/40 hover:-translate-y-1"
               )}
             >
-              {lot.status === "active" && (
+              {lot.status === "active" && !lite && (
                 <motion.div
                   aria-hidden="true"
                   className="absolute -inset-2 rounded-[20px] bg-apice-orange/30 -z-10 blur-2xl"

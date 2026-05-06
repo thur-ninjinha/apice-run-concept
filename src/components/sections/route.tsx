@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Flag, Droplet, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 const checkpoints = [
   {
@@ -40,6 +41,8 @@ const checkpoints = [
 ];
 
 export function Route() {
+  const lite = useLiteMotion();
+
   return (
     <section id="percurso" className="relative py-24 md:py-32 border-t border-white/5 bg-apice-asphalt overflow-hidden">
       <div className="absolute inset-0 -z-10 opacity-30">
@@ -117,18 +120,20 @@ export function Route() {
                 transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
               />
 
-              <g>
-                <circle r="14" fill="url(#runnerGlow)">
-                  <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
-                    <mpath href="#runnerPath" />
-                  </animateMotion>
-                </circle>
-                <circle r="4" fill="#fff">
-                  <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
-                    <mpath href="#runnerPath" />
-                  </animateMotion>
-                </circle>
-              </g>
+              {!lite && (
+                <g>
+                  <circle r="14" fill="url(#runnerGlow)">
+                    <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
+                      <mpath href="#runnerPath" />
+                    </animateMotion>
+                  </circle>
+                  <circle r="4" fill="#fff">
+                    <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
+                      <mpath href="#runnerPath" />
+                    </animateMotion>
+                  </circle>
+                </g>
+              )}
 
               <motion.circle
                 cx="60"
@@ -137,9 +142,13 @@ export function Route() {
                 fill="#f26f2c"
                 fillOpacity="0.3"
                 initial={{ scale: 0 }}
-                whileInView={{ scale: [1, 1.6, 1] }}
-                viewport={{ once: false }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                whileInView={lite ? { scale: 1 } : { scale: [1, 1.6, 1] }}
+                viewport={lite ? { once: true, margin: "-10%" } : { once: false }}
+                transition={
+                  lite
+                    ? { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+                    : { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }
               />
               <motion.circle
                 cx="60"
@@ -158,9 +167,13 @@ export function Route() {
                 fill="#f26f2c"
                 fillOpacity="0.3"
                 initial={{ scale: 0 }}
-                whileInView={{ scale: [1, 1.6, 1] }}
-                viewport={{ once: false }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                whileInView={lite ? { scale: 1 } : { scale: [1, 1.6, 1] }}
+                viewport={lite ? { once: true, margin: "-10%" } : { once: false }}
+                transition={
+                  lite
+                    ? { duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }
+                    : { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }
+                }
               />
               <motion.circle
                 cx="340"

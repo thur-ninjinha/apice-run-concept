@@ -98,7 +98,7 @@ export function Concept() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-20 grid grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden"
+            className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden"
           >
             {[
               { value: "5", suffix: "km", label: "percurso plano" },
@@ -107,12 +107,12 @@ export function Concept() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="bg-apice-asphalt p-6 md:p-10 flex flex-col justify-between min-h-[180px]"
+                className="bg-apice-asphalt p-6 md:p-10 flex flex-row sm:flex-col items-end sm:items-stretch justify-between sm:min-h-[180px] gap-4 sm:gap-0"
               >
-                <p className="text-xs text-apice-sweat/40 leading-snug max-w-[16ch]">
+                <p className="text-xs text-apice-sweat/40 leading-snug max-w-[16ch] order-2 sm:order-1">
                   {stat.label}
                 </p>
-                <p className="font-display text-6xl md:text-7xl lg:text-8xl text-apice-white leading-none mt-6">
+                <p className="font-display text-6xl md:text-7xl lg:text-8xl text-apice-white leading-none sm:mt-6 order-1 sm:order-2">
                   {stat.value}
                   <span className="text-apice-orange italic text-3xl md:text-4xl lg:text-5xl ml-1 align-top">
                     {stat.suffix}

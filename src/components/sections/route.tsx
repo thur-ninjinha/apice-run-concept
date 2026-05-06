@@ -87,6 +87,9 @@ export function Route() {
                   <stop offset="60%" stopColor="#f26f2c" stopOpacity="0.6" />
                   <stop offset="100%" stopColor="#f26f2c" stopOpacity="0" />
                 </radialGradient>
+                <filter id="routeShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" />
+                </filter>
               </defs>
 
               <path
@@ -98,8 +101,21 @@ export function Route() {
 
               <motion.path
                 d="M 60 220 Q 120 180 160 200 T 280 140 Q 320 120 340 80"
+                stroke="#f26f2c"
+                strokeOpacity="0.55"
+                strokeWidth="10"
+                fill="none"
+                strokeLinecap="round"
+                filter="url(#routeShadow)"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 2.5, ease: "easeInOut" }}
+              />
+              <motion.path
+                d="M 60 220 Q 120 180 160 200 T 280 140 Q 320 120 340 80"
                 stroke="url(#routeGradient)"
-                strokeWidth="3"
+                strokeWidth="5"
                 fill="none"
                 strokeLinecap="round"
                 strokeDasharray="6 8"
@@ -107,17 +123,6 @@ export function Route() {
                 whileInView={{ pathLength: 1 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 2.5, ease: "easeInOut" }}
-              />
-              <motion.path
-                d="M 340 80 Q 320 120 280 140 T 160 200 Q 120 180 60 220"
-                stroke="rgba(242,111,44,0.4)"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 2.5, delay: 0.5, ease: "easeInOut" }}
               />
 
               {!lite && (

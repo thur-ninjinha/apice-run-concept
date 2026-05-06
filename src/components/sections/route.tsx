@@ -86,8 +86,14 @@ export function Route() {
                 </radialGradient>
               </defs>
 
+              <path
+                id="runnerPath"
+                d="M 60 220 Q 120 180 160 200 T 280 140 Q 320 120 340 80"
+                fill="none"
+                stroke="none"
+              />
+
               <motion.path
-                id="routePath"
                 d="M 60 220 Q 120 180 160 200 T 280 140 Q 320 120 340 80"
                 stroke="url(#routeGradient)"
                 strokeWidth="3"
@@ -113,13 +119,13 @@ export function Route() {
 
               <g>
                 <circle r="14" fill="url(#runnerGlow)">
-                  <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
-                    <mpath href="#routePath" />
+                  <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
+                    <mpath href="#runnerPath" />
                   </animateMotion>
                 </circle>
                 <circle r="4" fill="#fff">
-                  <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
-                    <mpath href="#routePath" />
+                  <animateMotion dur="7s" repeatCount="indefinite" begin="2.5s">
+                    <mpath href="#runnerPath" />
                   </animateMotion>
                 </circle>
               </g>

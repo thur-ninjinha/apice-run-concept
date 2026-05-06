@@ -127,7 +127,7 @@ export function Hero() {
               initial={{ x: 80, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
-              className="block text-[18vw] sm:text-[14vw] lg:text-[11rem] xl:text-[13rem] italic text-apice-orange -mt-2 sm:-mt-4 drop-shadow-[0_4px_30px_rgba(242,111,44,0.3)]"
+              className="block text-[18vw] sm:text-[14vw] lg:text-[11rem] xl:text-[13rem] text-apice-orange -mt-2 sm:-mt-4 drop-shadow-[0_4px_30px_rgba(242,111,44,0.3)]"
             >
               Run
             </motion.span>
@@ -193,17 +193,17 @@ export function Hero() {
             <motion.a
               variants={fadeUp}
               href="#inscricao"
-              className="group inline-flex items-center justify-center px-8 py-4 rounded-full bg-apice-orange text-apice-black font-bold text-base hover:bg-apice-orange-light transition-all uppercase tracking-wide hover:scale-[1.02] active:scale-[0.98] shadow-[0_8px_30px_rgba(242,111,44,0.4)]"
+              className="group inline-flex items-center justify-center h-[52px] px-7 rounded-md bg-apice-orange text-apice-black font-bold text-sm uppercase tracking-wider shadow-[0_6px_18px_rgba(242,111,44,0.25)] transition-all duration-300 hover:bg-apice-orange-light hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(242,111,44,0.5)] active:translate-y-0 active:shadow-[0_4px_12px_rgba(242,111,44,0.3)]"
             >
               Garantir minha vaga
-              <span aria-hidden="true" className="ml-2 transition-transform group-hover:translate-x-1">
+              <span aria-hidden="true" className="ml-2 transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
             </motion.a>
             <motion.a
               variants={fadeUp}
               href="#percurso"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-apice-white font-medium text-base hover:bg-white/10 hover:border-white/50 transition-all uppercase tracking-wide backdrop-blur-sm"
+              className="inline-flex items-center justify-center h-[52px] px-7 rounded-md border-[1.5px] border-apice-white text-apice-white font-medium text-sm uppercase tracking-wider transition-all duration-300 hover:bg-apice-white hover:text-apice-black"
             >
               Ver percurso
             </motion.a>

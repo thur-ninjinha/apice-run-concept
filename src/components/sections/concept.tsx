@@ -1,10 +1,23 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { useLiteMotion } from "@/lib/use-lite-motion";
 
-function ConceptParallaxBg({
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const lineStagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.16, delayChildren: 0.15 } },
+};
+
+const fadeUp: Variants = {
+  hidden: { y: 26, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: EASE } },
+};
+
+function AmbientWord({
   targetRef,
 }: {
   targetRef: React.RefObject<HTMLElement | null>;
@@ -13,32 +26,18 @@ function ConceptParallaxBg({
     target: targetRef,
     offset: ["start end", "end start"],
   });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
 
   return (
-    <>
-      <motion.div
-        aria-hidden="true"
-        style={{ y: y1 }}
-        className="absolute -top-20 right-0 lg:right-[5%] pointer-events-none select-none"
-      >
-        <span className="block font-display italic text-[28vw] lg:text-[16vw] leading-[0.8] tracking-tighter text-apice-orange/[0.06]">
-          dupla
-        </span>
-      </motion.div>
-
-      <motion.div
-        aria-hidden="true"
-        style={{ y: y2 }}
-        className="absolute bottom-0 -left-[5%] pointer-events-none select-none"
-      >
-        <span className="block font-display text-[24vw] lg:text-[14vw] leading-[0.8] tracking-tighter text-apice-orange/[0.04]">
-          02→04
-        </span>
-      </motion.div>
-    </>
+    <motion.div
+      aria-hidden="true"
+      style={{ y }}
+      className="absolute -bottom-8 -right-[6%] pointer-events-none select-none"
+    >
+      <span className="block font-display uppercase text-[28vw] lg:text-[18vw] leading-[0.8] tracking-tighter text-apice-orange/[0.04]">
+        dupla
+      </span>
+    </motion.div>
   );
 }
 
@@ -51,113 +50,84 @@ export function Concept() {
       ref={ref}
       className="relative py-32 md:py-48 border-t border-white/5 bg-apice-asphalt overflow-hidden"
     >
-      {lite ? (
-        <>
-          <div
-            aria-hidden="true"
-            className="absolute -top-20 right-0 lg:right-[5%] pointer-events-none select-none"
-          >
-            <span className="block font-display italic text-[28vw] lg:text-[16vw] leading-[0.8] tracking-tighter text-apice-orange/[0.06]">
-              dupla
-            </span>
-          </div>
-          <div
-            aria-hidden="true"
-            className="absolute bottom-0 -left-[5%] pointer-events-none select-none"
-          >
-            <span className="block font-display text-[24vw] lg:text-[14vw] leading-[0.8] tracking-tighter text-apice-orange/[0.04]">
-              02→04
-            </span>
-          </div>
-        </>
-      ) : (
-        <ConceptParallaxBg targetRef={ref} />
-      )}
+      {!lite && <AmbientWord targetRef={ref} />}
 
       <div className="container mx-auto px-6 lg:px-12 relative">
-        <div className="max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-15%" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h2 className="font-display uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.92]">
-              <span className="block text-apice-white">Você corre.</span>
-              <span className="block text-apice-white">Ele corre.</span>
-              <span className="block italic text-apice-orange">A chegada é de vocês.</span>
-            </h2>
-          </motion.div>
-
-          <div className="mt-16 grid lg:grid-cols-12 gap-10 lg:gap-20">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-5 lg:col-start-1"
+        <SectionHeading
+          index="01"
+          label="A ideia"
+          title={
+            <motion.span
+              variants={lineStagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15%" }}
+              className="block"
             >
-              <p className="text-base md:text-lg text-apice-sweat/70 leading-[1.7] max-w-md">
-                A Ápice Run é a primeira corrida de rua de Natal pensada
-                para ser feita em dupla. Convide um amigo, um irmão, um pai —
-                e cada um faz a sua inscrição. No domingo, vocês cruzam a
-                largada juntos. Cinco quilômetros de Avenida Roberto Freire
-                pela frente. Duas medalhas no fim.
-              </p>
-            </motion.div>
+              <motion.span variants={fadeUp} className="block text-apice-white">
+                Você corre.
+              </motion.span>
+              <motion.span variants={fadeUp} className="block text-apice-white">
+                Ele corre.
+              </motion.span>
+              <motion.span variants={fadeUp} className="block text-apice-orange">
+                A chegada é de vocês.
+              </motion.span>
+            </motion.span>
+          }
+        />
 
-            <motion.aside
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-6 lg:col-start-7 relative"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute -top-6 -left-2 font-display text-7xl text-apice-orange/30 leading-none select-none"
-              >
-                &ldquo;
-              </span>
-              <blockquote className="font-display uppercase text-2xl md:text-3xl lg:text-4xl leading-[1.1] text-apice-white pl-8 border-l border-apice-orange">
-                Ninguém cruza a linha de chegada{" "}
-                <span className="italic text-apice-orange">sozinho</span>.
-              </blockquote>
-              <p className="mt-5 pl-8 text-xs uppercase tracking-[0.25em] text-apice-sweat/40">
-                — manifesto da edição 01
-              </p>
-            </motion.aside>
-          </div>
-
+        <div className="mt-20 md:mt-28 grid lg:grid-cols-12 gap-12 lg:gap-20">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden"
+            transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+            className="lg:col-span-6 lg:col-start-1"
           >
-            {[
-              { value: "5", suffix: "km", label: "percurso plano" },
-              { value: "05", suffix: "h", label: "horário da largada" },
-              { value: "01", suffix: "ª", label: "edição em 2026" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-apice-asphalt p-6 md:p-10 flex flex-row sm:flex-col items-end sm:items-stretch justify-between sm:min-h-[180px] gap-4 sm:gap-0"
-              >
-                <p className="text-xs text-apice-sweat/40 leading-snug max-w-[16ch] order-2 sm:order-1">
-                  {stat.label}
-                </p>
-                <p className="font-display text-6xl md:text-7xl lg:text-8xl text-apice-white leading-none sm:mt-6 order-1 sm:order-2">
-                  {stat.value}
-                  <span className="text-apice-orange italic text-3xl md:text-4xl lg:text-5xl ml-1 align-top">
-                    {stat.suffix}
-                  </span>
-                </p>
-              </div>
-            ))}
+            <p className="text-base md:text-lg text-apice-sweat/75 leading-[1.8] max-w-xl">
+              A Ápice Run é a primeira corrida de rua de Natal pensada
+              para ser feita em{" "}
+              <span className="text-apice-white">dupla</span>. Convide um
+              amigo, um irmão, um pai — e cada um faz a sua inscrição.
+              No domingo, vocês cruzam a largada juntos. Cinco quilômetros
+              de Avenida Roberto Freire pela frente.{" "}
+              <span className="text-apice-white">Duas medalhas no fim.</span>
+            </p>
           </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
+            className="lg:col-span-5 lg:col-start-8 relative"
+          >
+            <blockquote className="font-display uppercase text-2xl md:text-3xl lg:text-4xl leading-[1.15] text-apice-white pl-6 border-l border-apice-orange">
+              Ninguém cruza a linha de chegada{" "}
+              <span className="text-apice-orange">sozinho</span>.
+            </blockquote>
+            <p className="mt-5 pl-6 font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/40">
+              — manifesto da edição 01
+            </p>
+          </motion.aside>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="mt-24 md:mt-32 border-t border-white/10 pt-6 flex flex-wrap gap-x-10 gap-y-3 font-mono text-[11px] uppercase tracking-[0.2em] text-apice-sweat/55"
+        >
+          <span>5 km</span>
+          <span className="text-apice-sweat/25">/</span>
+          <span>05h00</span>
+          <span className="text-apice-sweat/25">/</span>
+          <span>01ª edição</span>
+          <span className="text-apice-sweat/25">/</span>
+          <span>em dupla</span>
+        </motion.div>
       </div>
     </section>
   );

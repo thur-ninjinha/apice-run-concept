@@ -1,62 +1,92 @@
 "use client";
 
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { motion, type Variants } from "motion/react";
+import { SectionHeading } from "@/components/ui/section-heading";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const lineStagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } },
+};
+
+const fadeUp: Variants = {
+  hidden: { y: 28, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.85, ease: EASE } },
+};
 
 export function FinalCta() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-apice-orange" />
-
-      <div className="absolute inset-0 opacity-[0.06] mix-blend-multiply"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      <div className="absolute -top-20 -right-20 size-[400px] rounded-full bg-apice-black/10 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 size-[400px] rounded-full bg-apice-black/10 blur-3xl" />
-
+    <section className="relative py-32 md:py-48 border-t border-white/5 bg-apice-black overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative">
+        <SectionHeading
+          index="07"
+          label="Última palavra"
+          title={
+            <motion.span
+              variants={lineStagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15%" }}
+              className="block"
+            >
+              <motion.span
+                variants={fadeUp}
+                className="block text-apice-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl"
+              >
+                Vai ser
+              </motion.span>
+              <motion.span
+                variants={fadeUp}
+                className="block text-apice-orange text-6xl sm:text-7xl md:text-8xl lg:text-9xl"
+              >
+                em dupla.
+              </motion.span>
+            </motion.span>
+          }
+        />
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl"
+          transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+          className="mt-16 md:mt-20 max-w-xl"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-apice-black/60 font-bold mb-6">
-            Falta pouco
-          </p>
-          <h2 className="font-display uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-apice-black">
-            Vai ficar
-            <br />
-            <span className="italic">de fora?</span>
-          </h2>
-          <p className="mt-8 max-w-xl text-lg sm:text-xl text-apice-black/70 leading-relaxed">
-            31 de maio · 05h · Ápice Academia. Você, seu amigo e 5 quilômetros
-            de Avenida Roberto Freire. Duas medalhas no fim.
+          <p className="text-base md:text-lg text-apice-sweat/70 leading-[1.8]">
+            31 de maio · 05h · Capim Macio. Você, seu amigo e cinco
+            quilômetros pela frente. Duas medalhas no fim.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5">
             <a
               href="#inscricao"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-apice-black text-apice-orange font-bold text-base hover:bg-apice-black/90 transition-all uppercase tracking-wide hover:scale-[1.02] active:scale-[0.98]"
+              className="group inline-flex items-center justify-center h-[54px] px-8 rounded-md bg-apice-orange text-apice-black font-bold text-sm uppercase tracking-wider shadow-[0_6px_18px_rgba(242,111,44,0.25)] transition-all duration-300 hover:bg-apice-orange-light hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(242,111,44,0.5)] active:translate-y-0"
             >
               Garantir minha vaga
-              <ArrowRight
+              <span
                 aria-hidden="true"
-                className="size-4 transition-transform group-hover:translate-x-1"
-              />
+                className="ml-3 transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </a>
+
             <a
               href="https://www.instagram.com/apicerunoficial/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-apice-black/30 text-apice-black font-bold text-base hover:bg-apice-black/5 hover:border-apice-black/50 transition-all uppercase tracking-wide"
+              className="group inline-flex items-center font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/60 hover:text-apice-orange transition-colors duration-300"
             >
-              Falar com a organização
+              <span className="border-b border-current pb-0.5">
+                Falar com a organização
+              </span>
+              <span
+                aria-hidden="true"
+                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </a>
           </div>
         </motion.div>

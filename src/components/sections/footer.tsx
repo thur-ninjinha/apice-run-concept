@@ -5,7 +5,7 @@ function InstagramIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -24,7 +24,7 @@ function FacebookIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -34,34 +34,41 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
+const navLinks = [
+  { href: "#percurso", label: "Percurso" },
+  { href: "#inscricao", label: "Inscrição" },
+  { href: "https://www.instagram.com/apicerunoficial/", label: "Instagram" },
+  { href: "https://www.instagram.com/apiceacademia/", label: "Ápice Academia" },
+];
+
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="relative bg-apice-black border-t border-white/5">
+    <footer className="relative bg-apice-black border-t border-white/10">
       <div className="container mx-auto px-6 lg:px-12 py-16 md:py-20">
-        <div className="grid md:grid-cols-12 gap-10 md:gap-8">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-10">
           <div className="md:col-span-5">
-            <div className="font-display uppercase text-4xl md:text-5xl tracking-tight">
-              <span className="text-apice-white">Ápice</span>
-              <span className="italic text-apice-orange ml-2">Run</span>
-              <span className="text-apice-sweat/40 text-2xl ml-2">2026</span>
-            </div>
-            <p className="mt-4 max-w-md text-sm text-apice-sweat/50 leading-relaxed">
-              Mais que uma corrida — é uma corrida com um amigo. 31 de maio,
-              05h, na Ápice Academia em Capim Macio, Natal/RN.
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-6">
+              § Ápice Run · Edição 01 / 2026
+            </p>
+            <p className="font-display uppercase text-4xl md:text-5xl tracking-tight leading-[0.9] text-apice-white">
+              Ápice
+              <br />
+              <span className="text-apice-orange">Run.</span>
+            </p>
+            <p className="mt-6 max-w-md text-sm text-apice-sweat/55 leading-relaxed">
+              Primeira corrida de rua de Natal pensada para ser feita
+              em dupla. 31 de maio · 05h · Ápice Academia · Capim Macio.
             </p>
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="text-xs uppercase tracking-[0.3em] text-apice-orange font-medium mb-5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/40 mb-6">
               Navegação
-            </h4>
-            <ul className="space-y-3 text-sm">
-              {[
-                { href: "#percurso", label: "O percurso" },
-                { href: "#inscricao", label: "Inscrição" },
-                { href: "https://www.instagram.com/apicerunoficial/", label: "Instagram" },
-                { href: "https://www.instagram.com/apiceacademia/", label: "Ápice Academia" },
-              ].map((l) => (
+            </p>
+            <ul className="space-y-3 font-mono text-[11px] uppercase tracking-[0.18em]">
+              {navLinks.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
@@ -78,26 +85,29 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-4">
-            <h4 className="text-xs uppercase tracking-[0.3em] text-apice-orange font-medium mb-5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/40 mb-6">
               Contato
-            </h4>
-            <address className="not-italic text-sm text-apice-sweat/60 leading-relaxed space-y-2">
+            </p>
+            <address className="not-italic text-sm text-apice-sweat/60 leading-relaxed space-y-1.5">
               <p>R. Aldo de Melo Freire, 1877</p>
               <p>Capim Macio · Natal/RN</p>
               <p className="pt-2">
-                <a href="tel:+5584991125989" className="hover:text-apice-orange transition-colors">
+                <a
+                  href="tel:+5584991125989"
+                  className="hover:text-apice-orange transition-colors font-mono uppercase tracking-[0.15em] text-[11px]"
+                >
                   (84) 99112-5989
                 </a>
               </p>
             </address>
 
-            <div className="flex items-center gap-3 mt-6">
+            <div className="flex items-center gap-3 mt-7">
               <a
                 href="https://www.instagram.com/apicerunoficial/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram da Ápice Run"
-                className="size-10 rounded-full border border-white/10 flex items-center justify-center text-apice-sweat/60 hover:border-apice-orange hover:text-apice-orange transition-all"
+                className="size-10 rounded-md border border-white/15 flex items-center justify-center text-apice-sweat/60 hover:border-apice-orange hover:text-apice-orange transition-all"
               >
                 <InstagramIcon className="size-4" />
               </a>
@@ -106,7 +116,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook da Ápice Academia"
-                className="size-10 rounded-full border border-white/10 flex items-center justify-center text-apice-sweat/60 hover:border-apice-orange hover:text-apice-orange transition-all"
+                className="size-10 rounded-md border border-white/15 flex items-center justify-center text-apice-sweat/60 hover:border-apice-orange hover:text-apice-orange transition-all"
               >
                 <FacebookIcon className="size-4" />
               </a>
@@ -114,16 +124,27 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5">
-          <div className="rounded-2xl border border-apice-orange/20 bg-apice-orange/5 p-5 md:p-6">
+        <div className="mt-16 pt-8 border-t border-white/10">
+          <div className="rounded-md border border-apice-orange/20 bg-apice-orange/[0.04] p-5 md:p-6">
             <p className="text-xs md:text-sm text-apice-sweat/70 leading-relaxed">
-              <span className="text-apice-orange font-bold uppercase tracking-wide">
+              <span className="font-mono uppercase tracking-[0.18em] text-apice-orange">
                 Aviso de portfólio:
               </span>{" "}
-              esta página é um <strong>projeto conceitual não-oficial</strong> desenvolvido
-              por <a href="https://zenitestudio.com.br" target="_blank" rel="noopener noreferrer" className="text-apice-orange hover:underline">Zênite Studio</a> como
-              demonstração de design. Para inscrições oficiais e informações verídicas
-              sobre o evento, consulte{" "}
+              esta página é um{" "}
+              <strong className="text-apice-white font-medium">
+                projeto conceitual não-oficial
+              </strong>{" "}
+              desenvolvido por{" "}
+              <a
+                href="https://zenitestudio.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-apice-orange hover:underline"
+              >
+                Zênite Studio
+              </a>{" "}
+              como demonstração de design. Para inscrições oficiais e informações
+              verídicas sobre o evento, consulte{" "}
               <a
                 href="https://www.instagram.com/apicerunoficial/"
                 target="_blank"
@@ -131,14 +152,14 @@ export function Footer() {
                 className="text-apice-orange hover:underline"
               >
                 @apicerunoficial
-              </a>{" "}
-              no Instagram.
+              </a>
+              .
             </p>
           </div>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-apice-sweat/40">
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.22em] text-apice-sweat/40">
             <p>
-              Concept design · {new Date().getFullYear()} ·{" "}
+              Concept design · {year} ·{" "}
               <a
                 href="https://zenitestudio.com.br"
                 target="_blank"
@@ -148,9 +169,7 @@ export function Footer() {
                 Zênite Studio
               </a>
             </p>
-            <p className="font-mono uppercase tracking-[0.2em]">
-              Treine · Corra · Supere
-            </p>
+            <p>Treine · Corra · Supere</p>
           </div>
         </div>
       </div>

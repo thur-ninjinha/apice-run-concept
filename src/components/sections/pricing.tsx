@@ -1,192 +1,147 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Countdown } from "@/components/ui/countdown";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { useLiteMotion } from "@/lib/use-lite-motion";
 
-type Status = "closed" | "active" | "upcoming";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-type Lot = {
+type LotInfo = {
   name: string;
   price: number;
-  status: Status;
-  caption: string;
-  perks: string[];
+  status: "closed" | "active" | "upcoming";
+  note: string;
 };
 
-const lots: Lot[] = [
-  {
-    name: "1º Lote",
-    price: 89,
-    status: "closed",
-    caption: "Encerrado",
-    perks: ["Camisa oficial", "Medalha exclusiva", "Hidratação completa"],
-  },
-  {
-    name: "2º Lote",
-    price: 119,
-    status: "active",
-    caption: "Lote atual · vagas limitadas",
-    perks: [
-      "Camisa oficial",
-      "Medalha exclusiva",
-      "Hidratação completa",
-      "Recovery Vértice",
-      "Fotos profissionais TRYX",
-    ],
-  },
-  {
-    name: "3º Lote",
-    price: 149,
-    status: "upcoming",
-    caption: "Abre 20/05 · semana do evento",
-    perks: [
-      "Camisa oficial",
-      "Medalha exclusiva",
-      "Hidratação completa",
-      "Recovery Vértice",
-      "Fotos profissionais TRYX",
-    ],
-  },
+const lots: LotInfo[] = [
+  { name: "Lote 01", price: 89, status: "closed", note: "encerrado" },
+  { name: "Lote 02", price: 119, status: "active", note: "atual · até 22.04.26" },
+  { name: "Lote 03", price: 149, status: "upcoming", note: "abre 20.05.26" },
 ];
 
 export function Pricing() {
-  const lite = useLiteMotion();
+  const active = lots.find((l) => l.status === "active")!;
 
   return (
     <section
       id="inscricao"
-      className="relative py-24 md:py-32 border-t border-white/5"
+      className="relative py-32 md:py-48 border-t border-white/5 bg-apice-asphalt"
     >
       <div className="container mx-auto px-6 lg:px-12">
         <SectionHeading
-          index="03"
+          index="05"
+          label="Inscrição"
           title={
             <>
-              Garanta sua vaga <span className="italic text-apice-orange">por R$ 119</span>.
+              Marca um amigo. <br />
+              <span className="text-apice-orange">Cada um faz a sua.</span>
             </>
           }
-          description="A inscrição é individual e o evento é em dupla. Marque um amigo e cada um faz sua inscrição. Vagas limitadas."
+          description="A inscrição é individual, e o evento é em dupla. Combinem o ritmo, o tênis e a hora de acordar — o resto a gente cuida."
         />
 
-        <div className="mt-16 grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-          {lots.map((lot, i) => (
-            <motion.div
-              key={lot.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{
-                duration: 0.6,
-                delay: i * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className={cn(
-                "relative rounded-2xl p-8 border flex flex-col transition-all duration-500",
-                lot.status === "active" &&
-                  "bg-apice-orange text-apice-black border-apice-orange shadow-2xl shadow-apice-orange/30 md:scale-[1.04] md:-translate-y-2",
-                lot.status === "closed" &&
-                  "bg-apice-asphalt/30 border-white/5 text-apice-sweat/40",
-                lot.status === "upcoming" &&
-                  "bg-apice-asphalt/60 border-white/10 text-apice-white hover:border-apice-orange/40 hover:-translate-y-1"
-              )}
+        <div className="mt-20 md:mt-28 grid lg:grid-cols-12 gap-16 lg:gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.85, ease: EASE }}
+            className="lg:col-span-7 lg:col-start-1"
+          >
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-5">
+              Lote em curso
+            </p>
+            <div className="flex items-start gap-3">
+              <span className="font-display text-base md:text-xl text-apice-sweat/55 mt-4 md:mt-6">
+                R$
+              </span>
+              <span className="font-display text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] leading-[0.85] text-apice-white tabular-nums tracking-tight">
+                {active.price}
+              </span>
+            </div>
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/55">
+              {active.note}
+            </p>
+
+            <a
+              href="#"
+              className="group mt-10 md:mt-12 inline-flex items-center justify-center h-[54px] px-8 rounded-md bg-apice-orange text-apice-black font-bold text-sm uppercase tracking-wider shadow-[0_6px_18px_rgba(242,111,44,0.25)] transition-all duration-300 hover:bg-apice-orange-light hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(242,111,44,0.5)] active:translate-y-0"
             >
-              {lot.status === "active" && !lite && (
-                <motion.div
-                  aria-hidden="true"
-                  className="absolute -inset-2 rounded-[20px] bg-apice-orange/30 -z-10 blur-2xl"
-                  animate={{ opacity: [0.4, 0.7, 0.4] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
-              )}
-              <div className="mb-6">
-                <div className="flex items-center justify-between">
-                  <p
-                    className={cn(
-                      "font-display text-xl md:text-2xl",
-                      lot.status === "active" ? "text-apice-black" : "text-apice-orange"
-                    )}
-                  >
+              Inscrever agora
+              <span
+                aria-hidden="true"
+                className="ml-3 transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.85, delay: 0.15, ease: EASE }}
+            className="lg:col-span-5 lg:col-start-8"
+          >
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-5">
+              Faltam
+            </p>
+            <Countdown />
+
+            <div className="mt-14 border-t border-white/10 pt-6 space-y-4">
+              {lots.map((lot) => (
+                <div
+                  key={lot.name}
+                  className={
+                    "grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 " +
+                    (lot.status === "active"
+                      ? "text-apice-white"
+                      : "text-apice-sweat/40")
+                  }
+                >
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em]">
                     {lot.name}
-                  </p>
-                  {lot.status === "active" && (
-                    <span className="flex items-center gap-1.5 text-[11px] font-semibold text-apice-black/70">
-                      <span className="size-1.5 rounded-full bg-apice-black animate-pulse" />
-                      em curso
-                    </span>
-                  )}
-                </div>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-sm font-medium opacity-60">R$</span>
+                  </span>
                   <span
-                    className={cn(
-                      "font-display text-6xl md:text-7xl leading-none",
-                      lot.status === "closed" && "line-through decoration-2 decoration-apice-sweat/20"
-                    )}
+                    className={
+                      "font-mono text-[10px] uppercase tracking-[0.18em] truncate " +
+                      (lot.status === "active"
+                        ? "text-apice-orange"
+                        : "text-apice-sweat/30")
+                    }
                   >
-                    {lot.price}
+                    {lot.note}
+                  </span>
+                  <span
+                    className={
+                      "font-display text-lg md:text-xl tabular-nums " +
+                      (lot.status === "closed"
+                        ? "line-through decoration-apice-sweat/30"
+                        : "")
+                    }
+                  >
+                    R$ {lot.price}
                   </span>
                 </div>
-                <p
-                  className={cn(
-                    "mt-2 text-xs italic",
-                    lot.status === "active" ? "text-apice-black/60" : "text-apice-sweat/50"
-                  )}
-                >
-                  {lot.caption}
-                </p>
-              </div>
-
-              <ul className="space-y-3 flex-1">
-                {lot.perks.map((perk) => (
-                  <li
-                    key={perk}
-                    className="flex items-start gap-2.5 text-sm leading-relaxed"
-                  >
-                    <Check
-                      className={cn(
-                        "size-4 mt-0.5 shrink-0",
-                        lot.status === "active" && "text-apice-black",
-                        lot.status === "upcoming" && "text-apice-orange",
-                        lot.status === "closed" && "text-apice-sweat/30"
-                      )}
-                      aria-hidden="true"
-                    />
-                    <span className={cn(lot.status === "closed" && "line-through")}>
-                      {perk}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                type="button"
-                disabled={lot.status !== "active"}
-                className={cn(
-                  "mt-8 w-full rounded-full py-3.5 text-sm font-bold uppercase tracking-wide transition-all",
-                  lot.status === "active" &&
-                    "bg-apice-black text-apice-orange hover:bg-apice-black/90 hover:scale-[1.02] active:scale-[0.98] cursor-pointer",
-                  lot.status === "closed" &&
-                    "bg-white/5 text-apice-sweat/30 cursor-not-allowed",
-                  lot.status === "upcoming" &&
-                    "bg-white/5 border border-white/10 text-apice-sweat/60 cursor-not-allowed"
-                )}
-                aria-disabled={lot.status !== "active"}
-              >
-                {lot.status === "active" && "Inscrever agora"}
-                {lot.status === "closed" && "Esgotado"}
-                {lot.status === "upcoming" && "Em breve"}
-              </button>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </motion.aside>
         </div>
 
-        <p className="mt-10 text-center text-xs text-apice-sweat/40 max-w-xl mx-auto">
-          Inscrições com cupom de embaixador (-20% no 2º lote): EMBAIXADOR20.
-          Cancelamentos até 20/05/2026 com reembolso integral.
-        </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-20 md:mt-24 max-w-2xl text-sm text-apice-sweat/45 leading-relaxed"
+        >
+          Cupom de embaixador (−20% no lote atual):{" "}
+          <span className="font-mono uppercase tracking-wider text-apice-sweat/70">
+            embaixador20
+          </span>
+          . Cancelamentos até 20.05.26 com reembolso integral.
+        </motion.p>
       </div>
     </section>
   );

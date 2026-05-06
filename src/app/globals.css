@@ -6,11 +6,13 @@
   --color-apice-orange-light: #ff8c4d;
   --color-apice-black: #0e0e0e;
   --color-apice-asphalt: #1a1a1a;
+  --color-apice-carbon: #2a2a2a;
   --color-apice-white: #fafafa;
   --color-apice-sweat: #e8e1d5;
 
   --font-display: var(--font-anton), "Impact", sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
 }
 
 @layer base {

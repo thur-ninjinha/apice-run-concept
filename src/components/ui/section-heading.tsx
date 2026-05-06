@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   index?: string;
+  label?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
   align?: "left" | "center";
@@ -13,6 +14,7 @@ type Props = {
 
 export function SectionHeading({
   index,
+  label,
   title,
   description,
   align = "left",
@@ -30,12 +32,23 @@ export function SectionHeading({
         className
       )}
     >
+      {(index || label) && (
+        <p
+          className={cn(
+            "font-mono text-[11px] tracking-[0.24em] uppercase text-apice-orange/70 mb-6 md:mb-10 flex items-center gap-3",
+            align === "center" && "justify-center"
+          )}
+        >
+          {index && <span>§{index}</span>}
+          {index && label && (
+            <span aria-hidden="true" className="text-apice-orange/30">
+              ──
+            </span>
+          )}
+          {label && <span>{label}</span>}
+        </p>
+      )}
       <h2 className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-apice-white">
-        {index && (
-          <span className="font-mono text-apice-orange/60 text-2xl md:text-3xl tracking-normal mr-3 align-top">
-            {index}
-          </span>
-        )}
         {title}
       </h2>
       {description && (

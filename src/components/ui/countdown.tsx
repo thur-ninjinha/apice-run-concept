@@ -32,24 +32,21 @@ export function Countdown() {
 
   const items = [
     { label: "dias", value: time?.days },
-    { label: "horas", value: time?.hours },
+    { label: "h", value: time?.hours },
     { label: "min", value: time?.minutes },
     { label: "seg", value: time?.seconds },
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 w-full max-w-xl">
+    <div className="flex flex-wrap items-baseline gap-x-5 sm:gap-x-7 gap-y-3">
       {items.map(({ label, value }) => (
-        <div
-          key={label}
-          className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm py-4 px-2 sm:py-6 sm:px-4 transition-colors hover:border-apice-orange/40"
-        >
-          <div className="font-display text-3xl sm:text-5xl md:text-6xl leading-none text-apice-orange tabular-nums">
+        <div key={label} className="flex items-baseline gap-1.5">
+          <span className="font-display text-3xl sm:text-4xl md:text-5xl text-apice-white tabular-nums leading-none">
             {value === undefined ? "--" : String(value).padStart(2, "0")}
-          </div>
-          <div className="text-[10px] sm:text-xs text-apice-sweat/50 uppercase tracking-[0.2em] mt-2 sm:mt-3">
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-apice-sweat/45">
             {label}
-          </div>
+          </span>
         </div>
       ))}
     </div>

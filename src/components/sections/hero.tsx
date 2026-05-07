@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -38,106 +39,143 @@ export function Hero() {
         <span className="tabular-nums">31.05.26 →</span>
       </motion.div>
 
-      <div className="relative flex-1 flex items-center container mx-auto px-6 lg:px-12 py-16 md:py-24">
-        <div className="w-full max-w-6xl">
-          <h1 className="font-display uppercase leading-[0.95]">
-            <motion.span
-              variants={apiceContainer}
+      <div className="relative flex-1 flex items-center container mx-auto px-6 lg:px-12 py-12 md:py-20">
+        <div className="w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-7">
+            <h1 className="font-display uppercase leading-[0.95]">
+              <motion.span
+                variants={apiceContainer}
+                initial="hidden"
+                animate="visible"
+                className="block text-[16vw] sm:text-[12vw] lg:text-[8rem] xl:text-[10rem] text-apice-white"
+                aria-label="Ápice"
+              >
+                {APICE_LETTERS.map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    variants={apiceLetter}
+                    className="inline-block"
+                    aria-hidden="true"
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </motion.span>
+              <motion.span
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.85, delay: 0.95, ease: EASE }}
+                className="block text-[16vw] sm:text-[12vw] lg:text-[8rem] xl:text-[10rem] text-apice-orange -mt-2 sm:-mt-3"
+              >
+                Run
+              </motion.span>
+            </h1>
+
+            <motion.div
+              variants={lineStagger}
               initial="hidden"
               animate="visible"
-              className="block text-[16vw] sm:text-[12vw] lg:text-[9rem] xl:text-[11rem] text-apice-white"
-              aria-label="Ápice"
+              className="mt-10 md:mt-14 max-w-xl"
             >
-              {APICE_LETTERS.map((letter, i) => (
-                <motion.span
-                  key={i}
-                  variants={apiceLetter}
-                  className="inline-block"
-                  aria-hidden="true"
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </motion.span>
-            <motion.span
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.85, delay: 0.95, ease: EASE }}
-              className="block text-[16vw] sm:text-[12vw] lg:text-[9rem] xl:text-[11rem] text-apice-orange -mt-2 sm:-mt-3"
-            >
-              Run
-            </motion.span>
-          </h1>
-
-          <motion.div
-            variants={lineStagger}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 md:mt-16 max-w-xl"
-          >
-            <motion.p
-              variants={fadeUp}
-              className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-white leading-[1.05]"
-            >
-              5 km.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-white leading-[1.05] mt-1"
-            >
-              Dois pares de tênis.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-orange leading-[1.05] mt-1"
-            >
-              Uma linha de chegada.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.95, ease: EASE }}
-            className="mt-14 md:mt-20 border-t border-white/10 pt-6 grid grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-6 font-mono text-[11px] uppercase tracking-[0.16em] text-apice-sweat/70"
-          >
-            <div>
-              <span className="block text-apice-sweat/40 mb-1.5">Data</span>
-              <span className="text-apice-white">31 maio · dom</span>
-            </div>
-            <div>
-              <span className="block text-apice-sweat/40 mb-1.5">Largada</span>
-              <span className="text-apice-white">05h00</span>
-            </div>
-            <div>
-              <span className="block text-apice-sweat/40 mb-1.5">Local</span>
-              <span className="text-apice-white">Av. Roberto Freire</span>
-            </div>
-            <div>
-              <span className="block text-apice-sweat/40 mb-1.5">Cidade</span>
-              <span className="text-apice-white">Natal · RN</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 2.15, ease: EASE }}
-            className="mt-12 md:mt-14"
-          >
-            <a
-              href="#inscricao"
-              className="group inline-flex items-center justify-center h-[54px] px-8 rounded-md bg-apice-orange text-apice-black font-bold text-sm uppercase tracking-wider shadow-[0_6px_18px_rgba(242,111,44,0.25)] transition-all duration-300 hover:bg-apice-orange-light hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(242,111,44,0.5)] active:translate-y-0"
-            >
-              Garantir minha vaga
-              <span
-                aria-hidden="true"
-                className="ml-3 transition-transform duration-300 group-hover:translate-x-1"
+              <motion.p
+                variants={fadeUp}
+                className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-white leading-[1.05]"
               >
-                →
-              </span>
-            </a>
-          </motion.div>
+                5 km.
+              </motion.p>
+              <motion.p
+                variants={fadeUp}
+                className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-white leading-[1.05] mt-1"
+              >
+                Dois pares de tênis.
+              </motion.p>
+              <motion.p
+                variants={fadeUp}
+                className="font-display uppercase text-3xl sm:text-4xl md:text-5xl text-apice-orange leading-[1.05] mt-1"
+              >
+                Uma linha de chegada.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.95, ease: EASE }}
+              className="mt-12 md:mt-16 border-t border-white/10 pt-6 grid grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-6 font-mono text-[11px] uppercase tracking-[0.16em] text-apice-sweat/70"
+            >
+              <div>
+                <span className="block text-apice-sweat/40 mb-1.5">Data</span>
+                <span className="text-apice-white">31 maio · dom</span>
+              </div>
+              <div>
+                <span className="block text-apice-sweat/40 mb-1.5">Largada</span>
+                <span className="text-apice-white">05h00</span>
+              </div>
+              <div>
+                <span className="block text-apice-sweat/40 mb-1.5">Local</span>
+                <span className="text-apice-white">Av. Roberto Freire</span>
+              </div>
+              <div>
+                <span className="block text-apice-sweat/40 mb-1.5">Cidade</span>
+                <span className="text-apice-white">Natal · RN</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 2.15, ease: EASE }}
+              className="mt-10 md:mt-12"
+            >
+              <a
+                href="#inscricao"
+                className="group inline-flex items-center justify-center h-[54px] px-8 rounded-md bg-apice-orange text-apice-black font-bold text-sm uppercase tracking-wider shadow-[0_6px_18px_rgba(242,111,44,0.25)] transition-all duration-300 hover:bg-apice-orange-light hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(242,111,44,0.5)] active:translate-y-0"
+              >
+                Garantir minha vaga
+                <span
+                  aria-hidden="true"
+                  className="ml-3 transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.figure
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.4, ease: EASE }}
+            className="hidden lg:block lg:col-span-5"
+          >
+            <div className="relative aspect-[4/5] rounded-md overflow-hidden border border-white/10 bg-apice-asphalt">
+              <Image
+                src="/images/finish.png"
+                alt="Atleta cruzando uma linha de chegada em corrida de rua"
+                fill
+                priority
+                sizes="(max-width: 1024px) 0px, 40vw"
+                quality={95}
+                style={{ objectPosition: "50% 78%" }}
+                className="object-cover saturate-[0.55] contrast-[1.05] brightness-[0.95]"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-apice-orange/10 mix-blend-multiply"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-apice-black/70 via-apice-black/30 to-transparent"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-apice-black/70 to-transparent"
+              />
+            </div>
+            <figcaption className="mt-3 text-[11px] text-apice-sweat/35 leading-relaxed">
+              imagem meramente ilustrativa
+            </figcaption>
+          </motion.figure>
         </div>
       </div>
 

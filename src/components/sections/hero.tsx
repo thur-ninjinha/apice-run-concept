@@ -148,7 +148,7 @@ export function Hero() {
             transition={{ duration: 1.1, delay: 0.4, ease: EASE }}
             className="hidden lg:block lg:col-span-5"
           >
-            <div className="relative aspect-[4/5] rounded-md overflow-hidden border border-white/10 bg-apice-asphalt">
+            <div className="relative aspect-square rounded-md overflow-hidden border border-white/10 bg-apice-asphalt">
               <Image
                 src="/images/finish.png"
                 alt="Atleta cruzando uma linha de chegada em corrida de rua"
@@ -156,20 +156,20 @@ export function Hero() {
                 priority
                 sizes="(max-width: 1024px) 0px, 40vw"
                 quality={95}
-                style={{ objectPosition: "50% 78%" }}
-                className="object-cover saturate-[0.55] contrast-[1.05] brightness-[0.95]"
+                style={{ objectPosition: "50% 100%", transform: "scale(1.55)", transformOrigin: "50% 100%" }}
+                className="object-cover saturate-[0.7] contrast-[1.05] brightness-[0.92]"
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-apice-orange/10 mix-blend-multiply"
+                className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-apice-black via-apice-black/70 to-transparent"
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-apice-black/70 via-apice-black/30 to-transparent"
+                className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-apice-black/60 to-transparent"
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-apice-black/70 to-transparent"
+                className="absolute inset-0 bg-apice-orange/[0.07] mix-blend-multiply"
               />
             </div>
             <figcaption className="mt-3 text-[11px] text-apice-sweat/35 leading-relaxed">

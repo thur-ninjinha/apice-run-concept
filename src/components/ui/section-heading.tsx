@@ -48,7 +48,7 @@ export function SectionHeading({
           {label && <span>{label}</span>}
         </p>
       )}
-      <h2 className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-apice-white">
+      <h2 className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.02] text-apice-white">
         {title}
       </h2>
       {description && (

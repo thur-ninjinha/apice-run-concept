@@ -106,6 +106,7 @@ export function FinalCta() {
                 alt="Atleta correndo em ritmo de prova"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                quality={95}
                 className="object-cover saturate-[0.9]"
               />
               <div
@@ -113,6 +114,9 @@ export function FinalCta() {
                 className="absolute inset-0 bg-gradient-to-t from-apice-black/40 to-transparent"
               />
             </div>
+            <figcaption className="mt-4 text-[11px] text-apice-sweat/35 leading-relaxed">
+              imagem meramente ilustrativa
+            </figcaption>
           </motion.figure>
         </div>
       </div>

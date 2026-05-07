@@ -40,7 +40,7 @@ export function Hero() {
 
       <div className="relative flex-1 flex items-center container mx-auto px-6 lg:px-12 py-16 md:py-24">
         <div className="w-full max-w-6xl">
-          <h1 className="font-display uppercase tracking-[-0.02em] leading-[0.85]">
+          <h1 className="font-display uppercase leading-[0.95]">
             <motion.span
               variants={apiceContainer}
               initial="hidden"

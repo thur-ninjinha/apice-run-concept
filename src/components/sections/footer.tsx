@@ -52,7 +52,7 @@ export function Footer() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-6">
               § Ápice Run · Edição 01 / 2026
             </p>
-            <p className="font-display uppercase text-4xl md:text-5xl tracking-tight leading-[0.9] text-apice-white">
+            <p className="font-display uppercase text-4xl md:text-5xl leading-[0.95] text-apice-white">
               Ápice
               <br />
               <span className="text-apice-orange">Run.</span>

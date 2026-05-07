@@ -57,17 +57,21 @@ export function Details() {
             transition={{ duration: 0.85, ease: EASE }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative aspect-[4/5] rounded-md overflow-hidden border border-white/10 bg-apice-orange">
+            <div className="relative aspect-square rounded-md overflow-hidden border border-white/10 bg-apice-orange">
               <Image
                 src="/images/kit.png"
                 alt="Kit oficial da Ápice Run 2026: camisa, short, tote bag, boné e garrafa"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                quality={95}
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/45">
+            <figcaption className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-apice-sweat/45 leading-relaxed">
               Kit completo · Edição 01
+              <span className="block mt-1 text-apice-sweat/30 normal-case tracking-normal text-[11px] font-sans">
+                imagem meramente ilustrativa
+              </span>
             </figcaption>
           </motion.figure>
 
@@ -115,11 +119,12 @@ export function Details() {
                 alt="Medalha oficial da Ápice Run 2026"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                quality={95}
                 className="object-cover"
               />
             </div>
-            <figcaption className="sr-only">
-              Medalha oficial da edição 01.
+            <figcaption className="mt-4 text-[11px] text-apice-sweat/35 leading-relaxed">
+              imagem meramente ilustrativa
             </figcaption>
           </figure>
 
@@ -127,7 +132,7 @@ export function Details() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-5">
               Medalha oficial
             </p>
-            <h3 className="font-display uppercase text-3xl md:text-5xl lg:text-6xl text-apice-white leading-[0.95]">
+            <h3 className="font-display uppercase text-3xl md:text-5xl lg:text-6xl text-apice-white leading-[1.05]">
               Pra você levar pra casa{" "}
               <span className="text-apice-orange">
                 no domingo de manhã.

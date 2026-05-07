@@ -33,7 +33,7 @@ export function Sponsors() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-6">
               Patrocínio oficial
             </p>
-            <div className="flex flex-wrap items-baseline gap-x-8 md:gap-x-14 gap-y-3 font-display uppercase text-5xl md:text-7xl lg:text-8xl tracking-tight text-apice-white leading-[0.95]">
+            <div className="flex flex-wrap items-baseline gap-x-8 md:gap-x-14 gap-y-3 font-display uppercase text-5xl md:text-7xl lg:text-8xl text-apice-white leading-[1.05]">
               {officials.map((name, i) => (
                 <span key={name} className="flex items-baseline">
                   <span>{name}</span>
@@ -59,7 +59,7 @@ export function Sponsors() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-6">
               Apoio
             </p>
-            <div className="flex flex-wrap items-baseline gap-x-6 md:gap-x-10 gap-y-2 font-display uppercase text-2xl md:text-4xl lg:text-5xl tracking-tight text-apice-sweat/75 leading-[1.1]">
+            <div className="flex flex-wrap items-baseline gap-x-6 md:gap-x-10 gap-y-2 font-display uppercase text-2xl md:text-4xl lg:text-5xl text-apice-sweat/75 leading-[1.15]">
               {supporters.map((name, i) => (
                 <span key={name} className="flex items-baseline">
                   <span>{name}</span>

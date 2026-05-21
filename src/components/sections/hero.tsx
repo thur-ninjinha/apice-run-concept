@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, type Variants } from "motion/react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const APICE_LETTERS = "ÁPICE".split("");
@@ -27,8 +29,24 @@ const lineStagger: Variants = {
 };
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const lite = useLiteMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, -48]);
+  const photoFilter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["saturate(0.7) contrast(1.05) brightness(0.92)", "saturate(0.95) contrast(1.08) brightness(0.92)"],
+  );
+
   return (
-    <section className="relative min-h-[100svh] flex flex-col bg-apice-black">
+    <section
+      ref={sectionRef}
+      className="relative min-h-[100svh] flex flex-col bg-apice-black"
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -146,19 +164,29 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.1, delay: 0.4, ease: EASE }}
+            style={lite ? undefined : { y: photoY }}
             className="hidden lg:block lg:col-span-5"
           >
             <div className="relative aspect-square rounded-md overflow-hidden border border-white/10 bg-apice-asphalt">
-              <Image
-                src="/images/finish.png"
-                alt="Atleta cruzando uma linha de chegada em corrida de rua"
-                fill
-                priority
-                sizes="(max-width: 1024px) 0px, 40vw"
-                quality={95}
-                style={{ objectPosition: "50% 100%", transform: "scale(1.55)", transformOrigin: "50% 100%" }}
-                className="object-cover saturate-[0.7] contrast-[1.05] brightness-[0.92]"
-              />
+              <motion.div
+                className="absolute inset-0"
+                style={
+                  lite
+                    ? { filter: "saturate(0.7) contrast(1.05) brightness(0.92)" }
+                    : { filter: photoFilter }
+                }
+              >
+                <Image
+                  src="/images/finish.png"
+                  alt="Atleta cruzando uma linha de chegada em corrida de rua"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 0px, 40vw"
+                  quality={95}
+                  style={{ objectPosition: "50% 100%", transform: "scale(1.55)", transformOrigin: "50% 100%" }}
+                  className="object-cover"
+                />
+              </motion.div>
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-apice-black via-apice-black/70 to-transparent"
@@ -186,7 +214,21 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 2.4 }}
         className="px-6 lg:px-12 pb-6 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-apice-sweat/30"
       >
-        <span>↓ role para continuar</span>
+        <span className="inline-flex items-baseline gap-2">
+          <motion.span
+            animate={lite ? undefined : { y: [0, 5, 0] }}
+            transition={lite ? undefined : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-block text-apice-orange/70"
+          >
+            ↓
+          </motion.span>
+          <motion.span
+            animate={lite ? undefined : { opacity: [0.3, 0.6, 0.3] }}
+            transition={lite ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            role para continuar
+          </motion.span>
+        </span>
         <span>§ 01—07</span>
       </motion.div>
     </section>

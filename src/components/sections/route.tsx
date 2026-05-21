@@ -1,43 +1,69 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useLiteMotion } from "@/lib/use-lite-motion";
+import { cn } from "@/lib/utils";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const checkpoints = [
+type Checkpoint = {
+  km: string;
+  label: string;
+  place: string;
+  cx: number;
+  cy: number;
+  accent?: boolean;
+  pivot?: boolean;
+};
+
+const checkpoints: Checkpoint[] = [
   {
     km: "0 KM",
     label: "Largada",
     place: "Ápice Academia · Capim Macio",
+    cx: 60,
+    cy: 220,
     accent: true,
   },
   {
     km: "1.5 KM",
     label: "1º apoio",
     place: "Av. Roberto Freire · sentido praia",
+    cx: 140,
+    cy: 192,
   },
   {
     km: "3 KM",
     label: "Retorno",
     place: "Ponto de virada",
+    cx: 220,
+    cy: 168,
+    pivot: true,
   },
   {
     km: "4 KM",
     label: "2º apoio",
     place: "Av. Roberto Freire · sentido academia",
+    cx: 290,
+    cy: 132,
   },
   {
     km: "5 KM",
     label: "Chegada",
     place: "Ápice Academia · arena de premiação",
+    cx: 340,
+    cy: 80,
     accent: true,
   },
 ];
 
+const routeStats = ["5 KM", "~28 M ELEVAÇÃO", "PLANO", "ASFALTO"];
+
 export function Route() {
   const lite = useLiteMotion();
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   return (
     <section
@@ -57,7 +83,24 @@ export function Route() {
           description="Cinco quilômetros pela orla de Natal. Ida e volta, dois pontos de hidratação, estrutura do começo ao fim."
         />
 
-        <div className="mt-20 md:mt-28 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <motion.ul
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/70"
+        >
+          {routeStats.map((stat, i) => (
+            <li key={stat} className="flex items-center gap-x-4">
+              <span>{stat}</span>
+              {i < routeStats.length - 1 && (
+                <span aria-hidden="true" className="text-apice-sweat/25">·</span>
+              )}
+            </li>
+          ))}
+        </motion.ul>
+
+        <div className="mt-12 md:mt-16 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -155,66 +198,59 @@ export function Route() {
                 </g>
               )}
 
-              <motion.circle
-                cx="60"
-                cy="220"
-                r="14"
-                fill="#f26f2c"
-                fillOpacity="0.18"
-                initial={{ scale: 0 }}
-                whileInView={lite ? { scale: 1 } : { scale: [1, 1.5, 1] }}
-                viewport={
-                  lite ? { once: true, margin: "-10%" } : { once: false }
-                }
-                transition={
-                  lite
-                    ? { duration: 0.5, ease: EASE }
-                    : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
-                }
-              />
-              <motion.circle
-                cx="60"
-                cy="220"
-                r="6"
-                fill="#f26f2c"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              />
-
-              <motion.circle
-                cx="340"
-                cy="80"
-                r="14"
-                fill="#f26f2c"
-                fillOpacity="0.18"
-                initial={{ scale: 0 }}
-                whileInView={lite ? { scale: 1 } : { scale: [1, 1.5, 1] }}
-                viewport={
-                  lite ? { once: true, margin: "-10%" } : { once: false }
-                }
-                transition={
-                  lite
-                    ? { duration: 0.5, delay: 0.3, ease: EASE }
-                    : {
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1.2,
-                      }
-                }
-              />
-              <motion.circle
-                cx="340"
-                cy="80"
-                r="6"
-                fill="#f26f2c"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.4, delay: 1.5 }}
-              />
+              {checkpoints.map((cp, i) => {
+                const isHovered = activeIdx === i;
+                const isAccent = Boolean(cp.accent);
+                return (
+                  <g key={`cp-${i}`}>
+                    {isAccent && (
+                      <motion.circle
+                        cx={cp.cx}
+                        cy={cp.cy}
+                        r="14"
+                        fill="#f26f2c"
+                        fillOpacity="0.18"
+                        initial={{ scale: 0 }}
+                        whileInView={lite ? { scale: 1 } : { scale: [1, 1.5, 1] }}
+                        viewport={lite ? { once: true, margin: "-10%" } : { once: false }}
+                        transition={
+                          lite
+                            ? { duration: 0.5, delay: i * 0.15, ease: EASE }
+                            : {
+                                duration: 2.5,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: i === 0 ? 0 : 1.2,
+                              }
+                        }
+                      />
+                    )}
+                    <motion.circle
+                      cx={cp.cx}
+                      cy={cp.cy}
+                      r="11"
+                      fill="#f26f2c"
+                      fillOpacity="0.18"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={isHovered ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: EASE }}
+                    />
+                    <motion.circle
+                      cx={cp.cx}
+                      cy={cp.cy}
+                      r={isAccent ? 6 : 4}
+                      fill="#f26f2c"
+                      fillOpacity={isAccent ? 1 : 0.55}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      animate={isHovered && !lite ? { scale: 1.6 } : undefined}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.4, delay: 0.4 + i * 0.18, ease: EASE }}
+                      style={{ transformOrigin: `${cp.cx}px ${cp.cy}px`, transformBox: "fill-box" }}
+                    />
+                  </g>
+                );
+              })}
 
               <text
                 x="60"
@@ -243,43 +279,56 @@ export function Route() {
             </svg>
           </motion.div>
 
-          <ol className="lg:col-span-5 space-y-0">
-            {checkpoints.map(({ km, label, place, accent }, i) => (
-              <motion.li
-                key={`${km}-${label}`}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.08,
-                  ease: EASE,
-                }}
-                className="grid grid-cols-[auto_1fr] gap-5 items-baseline border-b border-white/10 py-5 last:border-b-0"
-              >
-                <span
-                  className={
-                    "font-mono text-[11px] uppercase tracking-[0.22em] " +
-                    (accent ? "text-apice-orange" : "text-apice-sweat/40")
-                  }
+          <ol
+            className="lg:col-span-5 space-y-0"
+            onMouseLeave={() => setActiveIdx(null)}
+          >
+            {checkpoints.map(({ km, label, place, accent }, i) => {
+              const isHovered = activeIdx === i;
+              return (
+                <motion.li
+                  key={`${km}-${label}`}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{
+                    duration: 0.55,
+                    delay: i * 0.08,
+                    ease: EASE,
+                  }}
+                  onMouseEnter={() => setActiveIdx(i)}
+                  onFocus={() => setActiveIdx(i)}
+                  onBlur={() => setActiveIdx(null)}
+                  tabIndex={0}
+                  className={cn(
+                    "grid grid-cols-[auto_1fr] gap-5 items-baseline border-b border-white/10 py-5 last:border-b-0 cursor-default outline-none transition-colors",
+                    isHovered && "border-b-apice-orange/40",
+                  )}
                 >
-                  0{i + 1}
-                </span>
-                <div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="font-display text-2xl md:text-3xl text-apice-white tracking-tight leading-none">
-                      {km}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-apice-sweat/55">
-                      {label}
-                    </span>
+                  <span
+                    className={cn(
+                      "font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                      accent || isHovered ? "text-apice-orange" : "text-apice-sweat/40",
+                    )}
+                  >
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <span className="font-display text-2xl md:text-3xl text-apice-white tracking-tight leading-none">
+                        {km}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-apice-sweat/55">
+                        {label}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm text-apice-sweat/55 leading-relaxed">
+                      {place}
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm text-apice-sweat/55 leading-relaxed">
-                    {place}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
+                </motion.li>
+              );
+            })}
           </ol>
         </div>
       </div>

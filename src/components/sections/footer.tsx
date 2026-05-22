@@ -37,7 +37,7 @@ function FacebookIcon({ className }: { className?: string }) {
 const navLinks = [
   { href: "#percurso", label: "Percurso" },
   { href: "#inscricao", label: "Inscrição" },
-  { href: "https://www.instagram.com/apicerunoficial/", label: "Instagram" },
+  { href: "https://www.instagram.com/aurorarunoficial/", label: "Instagram" },
   { href: "https://www.instagram.com/apiceacademia/", label: "Ápice Academia" },
 ];
 
@@ -50,10 +50,10 @@ export function Footer() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-10">
           <div className="md:col-span-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-apice-orange/70 mb-6">
-              § Ápice Run · Edição 01 / 2026
+              § Aurora Run · Edição 01 / 2026
             </p>
             <p className="font-display uppercase text-4xl md:text-5xl leading-[0.95] text-apice-white">
-              Ápice
+              Aurora
               <br />
               <span className="text-apice-orange">Run.</span>
             </p>
@@ -103,10 +103,10 @@ export function Footer() {
 
             <div className="flex items-center gap-3 mt-7">
               <a
-                href="https://www.instagram.com/apicerunoficial/"
+                href="https://www.instagram.com/aurorarunoficial/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram da Ápice Run"
+                aria-label="Instagram da Aurora Run"
                 className="size-10 rounded-md border border-white/15 flex items-center justify-center text-apice-sweat/60 hover:border-apice-orange hover:text-apice-orange transition-all"
               >
                 <InstagramIcon className="size-4" />
@@ -146,12 +146,12 @@ export function Footer() {
               como demonstração de design. Para inscrições oficiais e informações
               verídicas sobre o evento, consulte{" "}
               <a
-                href="https://www.instagram.com/apicerunoficial/"
+                href="https://www.instagram.com/aurorarunoficial/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-apice-orange hover:underline"
               >
-                @apicerunoficial
+                @aurorarunoficial
               </a>
               .
             </p>

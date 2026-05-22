@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 const faqs = [
   {
     q: "Posso correr sozinho ou tenho que estar em dupla?",
-    a: "A Ápice Run é desenhada para duplas, mas a inscrição é individual. Você pode se inscrever sozinho e formar dupla com outro inscrito no dia. O importante é o espírito colaborativo do percurso.",
+    a: "A Aurora Run é desenhada para duplas, mas a inscrição é individual. Você pode se inscrever sozinho e formar dupla com outro inscrito no dia. O importante é o espírito colaborativo do percurso.",
   },
   {
     q: "Idosos, PCDs e doadores de sangue têm desconto?",
@@ -42,7 +42,7 @@ export function Faq() {
               Tirando suas <span className="italic text-apice-orange">dúvidas</span>.
             </>
           }
-          description="Não achou o que procurava? Fale com a organização no Instagram @apicerunoficial."
+          description="Não achou o que procurava? Fale com a organização no Instagram @aurorarunoficial."
         />
 
         <div className="mt-12 max-w-3xl mx-auto divide-y divide-white/5 border-y border-white/5">

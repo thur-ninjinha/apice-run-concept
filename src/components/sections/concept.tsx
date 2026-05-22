@@ -86,7 +86,7 @@ export function Concept() {
             className="lg:col-span-6 lg:col-start-1"
           >
             <p className="text-base md:text-lg text-apice-sweat/75 leading-[1.8] max-w-xl">
-              A Ápice Run é a primeira corrida de rua de Natal pensada
+              A Aurora Run é a primeira corrida de rua de Natal pensada
               para ser feita em{" "}
               <span className="text-apice-white">dupla</span>. Convide um
               amigo, um irmão, um pai — e cada um faz a sua inscrição.

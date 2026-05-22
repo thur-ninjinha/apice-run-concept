@@ -89,7 +89,7 @@ export function Sponsors() {
             href="#"
             className="text-apice-orange hover:text-apice-orange-light transition-colors"
           >
-            @apicerunoficial
+            @aurorarunoficial
           </a>
         </motion.p>
       </div>

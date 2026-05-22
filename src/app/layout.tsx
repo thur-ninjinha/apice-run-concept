@@ -17,12 +17,12 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ápice Run 2026 — 5K em Natal/RN | 31 de maio",
+  title: "Aurora Run 2026 — 5K em Natal/RN | 31 de maio",
   description:
-    "Mais que uma corrida, é uma corrida com um amigo. Ápice Run 2026 — 5 km em Natal/RN, 31 de maio às 5h. Inscrições abertas.",
+    "Mais que uma corrida, é uma corrida com um amigo. Aurora Run 2026 — 5 km em Natal/RN, 31 de maio às 5h. Inscrições abertas.",
   robots: { index: false, follow: false },
   openGraph: {
-    title: "Ápice Run 2026 — 5K em Natal/RN",
+    title: "Aurora Run 2026 — 5K em Natal/RN",
     description:
       "Mais que uma corrida, é uma corrida com um amigo. 31 de maio · 05h · Av. Roberto Freire.",
     type: "website",

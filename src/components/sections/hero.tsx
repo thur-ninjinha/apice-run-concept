@@ -6,14 +6,14 @@ import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import { useLiteMotion } from "@/lib/use-lite-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const APICE_LETTERS = "ÁPICE".split("");
+const AURORA_LETTERS = "AURORA".split("");
 
-const apiceContainer: Variants = {
+const auroraContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.05, delayChildren: 0.45 } },
 };
 
-const apiceLetter: Variants = {
+const auroraLetter: Variants = {
   hidden: { y: 40, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 0.7, ease: EASE } },
 };
@@ -53,7 +53,7 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="px-6 lg:px-12 py-6 flex items-center justify-between font-mono text-[11px] tracking-[0.18em] uppercase text-apice-sweat/40"
       >
-        <span>Ápice Run · Edição 01</span>
+        <span>Aurora Run · Edição 01</span>
         <span className="tabular-nums">31.05.26 →</span>
       </motion.div>
 
@@ -62,16 +62,16 @@ export function Hero() {
           <div className="lg:col-span-7">
             <h1 className="font-display uppercase leading-[0.95]">
               <motion.span
-                variants={apiceContainer}
+                variants={auroraContainer}
                 initial="hidden"
                 animate="visible"
                 className="block text-[16vw] sm:text-[12vw] lg:text-[8rem] xl:text-[10rem] text-apice-white"
-                aria-label="Ápice"
+                aria-label="Aurora"
               >
-                {APICE_LETTERS.map((letter, i) => (
+                {AURORA_LETTERS.map((letter, i) => (
                   <motion.span
                     key={i}
-                    variants={apiceLetter}
+                    variants={auroraLetter}
                     className="inline-block"
                     aria-hidden="true"
                   >

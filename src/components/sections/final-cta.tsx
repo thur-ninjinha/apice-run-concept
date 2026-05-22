@@ -75,7 +75,7 @@ export function FinalCta() {
               </a>
 
               <a
-                href="https://www.instagram.com/apicerunoficial/"
+                href="https://www.instagram.com/aurorarunoficial/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center font-mono text-[11px] uppercase tracking-[0.22em] text-apice-sweat/60 hover:text-apice-orange transition-colors duration-300"

@@ -60,7 +60,7 @@ export function Details() {
             <div className="relative aspect-square rounded-md overflow-hidden border border-white/10 bg-apice-orange">
               <Image
                 src="/images/kit.png"
-                alt="Kit oficial da Ápice Run 2026: camisa, short, tote bag, boné e garrafa"
+                alt="Kit oficial da Aurora Run 2026: camisa, short, tote bag, boné e garrafa"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 quality={95}
@@ -116,7 +116,7 @@ export function Details() {
             <div className="relative aspect-[4/5] rounded-md overflow-hidden border border-white/10 bg-apice-asphalt">
               <Image
                 src="/images/medal.png"
-                alt="Medalha oficial da Ápice Run 2026"
+                alt="Medalha oficial da Aurora Run 2026"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 quality={95}
